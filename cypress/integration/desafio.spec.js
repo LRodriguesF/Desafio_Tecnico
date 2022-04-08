@@ -1,13 +1,13 @@
 /// <reference types="Cypress"/>
-
 before(() => {
-    cy.visit('https://www.gria.io/oportunidades')
+    cy.visit('https://www.submarino.com.br/')
+    cy.login(Cypress.env('EMAIL_USUÁRIO'), Cypress.env('SENHA_USUÁRIO'))
 })
-
-it('Validar dados válidos nos campos “Pesquisar” e “Cidade ou estado”',()=>{
-    cy.get(':nth-child(1) > .MuiInputBase-root > .MuiInputBase-input').type('Analista de Qualidade de Software - QA Júnior')
-    cy.get(':nth-child(2) > .MuiInputBase-root > .MuiInputBase-input').type('Brasil')
-    cy.get('.jss112').click()
-    cy.get('.jss307').contains('Analista de Qualidade de Software - QA Júnior').should('be.visible')
-    cy.get('.jss314 > .MuiTypography-root').contains('Brasil').should('be.visible')
+it('Inserir produto no favoritos',() => {
+    cy.get('#h_search-input').type('Fogão')
+    cy.get('#h_search-btn').click()
+    cy.get('.bIoTYC > .grid__StyledGrid-sc-1man2hx-0 > :nth-child(1)').contains('Fogão').click()
+    cy.get('.src__Title-sc-1u9ae8m-1').click()
+    cy.get('.wish-icon-default').click()
+    cy.get('.page__ProductWrapper-sc-wxdus-4').contains('Fogão')
 })
